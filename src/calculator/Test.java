@@ -7,9 +7,7 @@ import java.io.InputStreamReader;
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        Checker checker = new Checker();
         KakaoCalculator cal = new KakaoCalculator();
-        MyCalculator myCalculator = new MyCalculator();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while(true){

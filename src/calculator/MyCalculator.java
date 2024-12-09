@@ -1,10 +1,9 @@
 package calculator;
 
 public class MyCalculator {
-    public void root(String command){
+    public double root(String command){
         int x = Integer.parseInt(command);
-        int result = (int) Math.sqrt(x);
-        System.out.println("카카오 계산 결과 : " + result);
+        return (double) Math.round(Math.sqrt(x) * 100) / 100;
     }
 
 }

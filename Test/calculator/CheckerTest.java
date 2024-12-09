@@ -69,4 +69,11 @@ class CheckerTest {
             }
         }
     }
+
+    @Test
+    public void calculate(){
+        KakaoCalculator kakaoCalculator = new KakaoCalculator();
+        String command = "2 / 3";
+        kakaoCalculator.calculate(command);
+    }
 }
