@@ -13,6 +13,7 @@ public class Checker {
             String c = Character.toString(command.charAt(i));
             checkCommand.add(c);
         }
+
         if(command.matches("^[0-9 .]*$")){
             checkedCommand.add(Double.parseDouble(command));
         }
@@ -23,6 +24,7 @@ public class Checker {
                 for (OperatorEnum ope : OperatorEnum.values()) {
                     String c = checkCommand.get(i);
                     if (c.equals(ope.getSign())) {
+
                         double x = Double.parseDouble(command.substring(0, i));
                         checkedCommand.add(x);
                         checkedCommand.add(ope.getSign());
@@ -37,6 +39,7 @@ public class Checker {
                 if (i == checkCommand.size() - 1) {
                     try {
                         double x = Double.parseDouble(command);
+
                         if(x < 0) throw new IllegalArgumentException(x + " : 음수만 입력하셨습니다. 연산이 불가합니다.");
                         if(x > 0) checkedCommand.add(x);
                     } catch (NumberFormatException e) {

@@ -109,6 +109,4 @@ class CheckerTest {
         double actualResult = calculator.calculate(command);
         assertEquals(expectedResult,actualResult);
     }
-
-
 }
