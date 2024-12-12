@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -75,14 +73,12 @@ class CheckerTest {
         assertEquals("[5.0 ^ 2.0 = 25.0, 5.0 - 2.0 = 3.0]", calculator.getList().toString());
     }
 
-
-    @DisplayName("명령 입출력 테스트: 1 = 계산")
-    @Test
-    public void swtichTest() throws IOException {
-        int result = input.processInput(1);
-        String in = "5+3";
-        System.setIn(new ByteArrayInputStream(in.getBytes()));
-        assertEquals("5+3", result);
+    @ParameterizedTest
+    @DisplayName("명령 입출력 테스트: 1-1 / 2-2 / 3-3")
+    @ValueSource(ints = {2,3,4})
+    public void swtichTest(int command) throws IOException {
+        int result = input.processInput(command);
+        assertEquals(command, result);
     }
 
     ///////////////////////////////////에러 테스트
