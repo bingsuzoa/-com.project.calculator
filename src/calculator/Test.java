@@ -14,6 +14,7 @@ public class Test {
             int N = Integer.parseInt(br.readLine());
             int result = input.processInput(N);
             if(result== 3) break;
+      
         }
     }
 

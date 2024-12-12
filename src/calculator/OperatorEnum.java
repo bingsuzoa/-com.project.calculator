@@ -29,7 +29,6 @@ public enum OperatorEnum {
         operatorMap = Collections.unmodifiableMap(temp);
     }
 
-
     OperatorEnum(String sign, DoubleBinaryOperator expression){
         this.sign = sign;
         this.expression = expression;
@@ -42,7 +41,6 @@ public enum OperatorEnum {
     public static OperatorEnum getSymbol(final String sign){
         return operatorMap.get(sign);
     }
-
     public double apply(double x, double y){
         return expression.applyAsDouble(x, y);
     }

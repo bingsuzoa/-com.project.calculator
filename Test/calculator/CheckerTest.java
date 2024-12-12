@@ -14,6 +14,7 @@ class CheckerTest {
     Checker checker = new Checker();
     Input input = new Input();
 
+
     //////////////////해피 테스트
     @DisplayName("덧셈 테스트")
     @ParameterizedTest
@@ -81,6 +82,7 @@ class CheckerTest {
         assertEquals(command, result);
     }
 
+
     ///////////////////////////////////에러 테스트
     @ParameterizedTest
     @DisplayName("0으로 나누었을 때 : throw ArithmeticException")
@@ -118,6 +120,4 @@ class CheckerTest {
         double actualResult = calculator.calculate(command);
         assertEquals(expectedResult,actualResult);
     }
-
-
 }

@@ -13,6 +13,7 @@ public class Checker {
             String c = Character.toString(command.charAt(i));
             checkCommand.add(c);
         }
+
         if(command.matches("^[0-9 .]*$")){
             checkedCommand.add(Double.parseDouble(command));
         }

@@ -36,6 +36,7 @@ public class KakaoCalculator {
         return list;
     }
 
+
     public String printRoot(String command, double result){
         System.out.println("카카오 계산 결과 : " + result);
         list.add("root " + command + " = : " + result);
