@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.DoubleBinaryOperator;
 
-
 public enum OperatorEnum {
     ADD("+", (x , y) -> x + y),
     MINUS("-", (x , y) -> x - y),
