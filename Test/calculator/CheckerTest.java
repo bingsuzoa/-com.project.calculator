@@ -5,12 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.Scanner;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 class CheckerTest {
     KakaoCalculator calculator = new KakaoCalculator();
     Checker checker = new Checker();
+    Input input = new Input();
 
     //////////////////해피 테스트
     @DisplayName("덧셈 테스트")
@@ -71,6 +75,15 @@ class CheckerTest {
         assertEquals("[5.0 ^ 2.0 = 25.0, 5.0 - 2.0 = 3.0]", calculator.getList().toString());
     }
 
+
+    @DisplayName("명령 입출력 테스트: 1 = 계산")
+    @Test
+    public void swtichTest() throws IOException {
+        int result = input.processInput(1);
+        String in = "5+3";
+        System.setIn(new ByteArrayInputStream(in.getBytes()));
+        assertEquals("5+3", result);
+    }
 
     ///////////////////////////////////에러 테스트
     @ParameterizedTest

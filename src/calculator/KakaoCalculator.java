@@ -32,6 +32,7 @@ public class KakaoCalculator {
     }
 
     public List<String> getList(){
+        for(String result : list) System.out.println(result);
         return list;
     }
 
