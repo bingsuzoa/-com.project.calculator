@@ -6,14 +6,14 @@ import java.util.List;
 public class KakaoCalculator {
     private final Checker checker = new Checker();
     private final List<String> list = new ArrayList<>();
-    private final MyCalculator myCal = new MyCalculator();
 
     public double calculate(String command) {
         double result = 0;
         try{
             List<Object> checkedCommand = checker.checkInputStructure(command);
             if(checkedCommand.size() == 1) {
-                result = myCal.root(command);
+                double x = Double.parseDouble(command);
+                result =  (double) Math.round(Math.sqrt(x) * 100) / 100;
                 printRoot(command, result);
             } else {
                 double x = (double)checkedCommand.getFirst();
