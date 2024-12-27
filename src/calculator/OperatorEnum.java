@@ -42,7 +42,6 @@ public enum OperatorEnum {
     public static OperatorEnum getEnumFromSign(final String sign){
         return operatorMap.get(sign);
     }
-
     public double apply(double x, double y){
         return expression.applyAsDouble(x, y);
     }

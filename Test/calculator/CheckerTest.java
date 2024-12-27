@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CheckerTest {
@@ -73,6 +72,7 @@ class CheckerTest {
         assertEquals("[5.0 ^ 2.0 = 25.0, 5.0 - 2.0 = 3.0]", calculator.getList().toString());
     }
 
+
     @ParameterizedTest
     @DisplayName("명령 입출력 테스트: 1-1 / 2-2 / 3-3")
     @ValueSource(ints = {2,3,4})
@@ -84,6 +84,7 @@ class CheckerTest {
     ///////////////////////////////////에러 테스트
     @ParameterizedTest
     @DisplayName("0으로 나누었을 때 : throw ArithmeticException")
+
     @CsvSource(value = {"5,0", "0, -5"})
     public void divideZeroException(double x, double y){;
         OperatorEnum operator = OperatorEnum.getEnumFromSign("/");
@@ -102,6 +103,7 @@ class CheckerTest {
     public void negativeException(){
         String command = "-1.5";
         assertThrows(IllegalArgumentException.class, () -> checker.checkInput(command));
+
     }
 
     ///////////////////////////경계테스트
@@ -119,6 +121,4 @@ class CheckerTest {
         double actualResult = calculator.calculate(command);
         assertEquals(expectedResult,actualResult);
     }
-
-
 }
