@@ -39,7 +39,7 @@ public enum OperatorEnum {
         return sign;
     }
 
-    public static OperatorEnum getSymbol(final String sign){
+    public static OperatorEnum getEnumFromSign(final String sign){
         return operatorMap.get(sign);
     }
 
