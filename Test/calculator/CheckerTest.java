@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
-
 
 class CheckerTest {
     KakaoCalculator calculator = new KakaoCalculator();
-    Checker checker = new Checker();
+    InputChecker checker = new InputChecker();
+    Input input = new Input();
 
     //////////////////해피 테스트
     @DisplayName("덧셈 테스트")
@@ -72,26 +73,37 @@ class CheckerTest {
     }
 
 
+    @ParameterizedTest
+    @DisplayName("명령 입출력 테스트: 1-1 / 2-2 / 3-3")
+    @ValueSource(ints = {2,3,4})
+    public void swtichTest(int command) throws IOException {
+        int result = input.processInput(command);
+        assertEquals(command, result);
+    }
+
     ///////////////////////////////////에러 테스트
     @ParameterizedTest
     @DisplayName("0으로 나누었을 때 : throw ArithmeticException")
-    @ValueSource(strings = {"5 / 0", " 0 / -5"})
-    public void divideZeroException(String command){;
-        assertThrows(ArithmeticException.class, () -> checker.checkInputStructure(command));
+
+    @CsvSource(value = {"5,0", "0, -5"})
+    public void divideZeroException(double x, double y){;
+        OperatorEnum operator = OperatorEnum.getEnumFromSign("/");
+        assertThrows(ArithmeticException.class, () -> operator.apply(x,y));
     }
 
     @ParameterizedTest
     @DisplayName("유효하지 않은 연산자 입력했을 때 : throw IllegalArgumentException")
     @ValueSource(strings = {"5 # 3, 5 ? 3, 5 @ 2"})
     public void invalidOperatorException(String command){
-        assertThrows(IllegalArgumentException.class, () -> checker.checkInputStructure(command));
+        assertThrows(IllegalArgumentException.class, () -> checker.checkInput(command));
     }
 
     @DisplayName("음수만 입력했을 때 : IllegalArgumentException")
     @Test
     public void negativeException(){
         String command = "-1.5";
-        assertThrows(IllegalArgumentException.class, () -> checker.checkInputStructure(command));
+        assertThrows(IllegalArgumentException.class, () -> checker.checkInput(command));
+
     }
 
     ///////////////////////////경계테스트

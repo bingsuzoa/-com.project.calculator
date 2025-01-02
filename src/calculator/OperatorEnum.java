@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.DoubleBinaryOperator;
 
-
 public enum OperatorEnum {
     ADD("+", (x , y) -> x + y),
     MINUS("-", (x , y) -> x - y),
@@ -30,6 +29,7 @@ public enum OperatorEnum {
         operatorMap = Collections.unmodifiableMap(temp);
     }
 
+
     OperatorEnum(String sign, DoubleBinaryOperator expression){
         this.sign = sign;
         this.expression = expression;
@@ -39,7 +39,7 @@ public enum OperatorEnum {
         return sign;
     }
 
-    public static OperatorEnum getSymbol(final String sign){
+    public static OperatorEnum getEnumFromSign(final String sign){
         return operatorMap.get(sign);
     }
     public double apply(double x, double y){

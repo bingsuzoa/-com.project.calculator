@@ -2,26 +2,30 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class KakaoCalculator {
-    private final Checker checker = new Checker();
+    private final InputChecker checker = new InputChecker();
     private final List<String> list = new ArrayList<>();
-    private final MyCalculator myCal = new MyCalculator();
 
-    public double calculate(String command) {
+    public double calculate(String input) {
+        input = input.replace(" ", "");
         double result = 0;
         try{
-            List<Object> checkedCommand = checker.checkInputStructure(command);
-            if(checkedCommand.size() == 1) {
-                result = myCal.root(command);
-                printRoot(command, result);
+            Map<String, Object> checkedInputMap = checker.checkInput(input);
+            String operatorString = (String)checkedInputMap.get("operator");
+            int index = (Integer)checkedInputMap.get("index");
+
+            if(operatorString.matches("^[0-9 .]*$")) {
+                double x = Double.parseDouble(operatorString);
+                result =  (double) Math.round(Math.sqrt(x) * 100) / 100;
+                printSquareRoot(input, result);
             } else {
-                double x = (double)checkedCommand.getFirst();
-                String operator = (String)checkedCommand.get(1);
-                double y = (double)checkedCommand.getLast();
-                OperatorEnum operatorEnum = OperatorEnum.getSymbol(operator);
-                result = operatorEnum.apply(x,y);
-                printResult(x, operatorEnum.getSign(), y, result);
+                double x = Double.parseDouble(input.substring(0, index));
+                double y = Double.parseDouble(input.substring(index + 1));
+                OperatorEnum operator = OperatorEnum.getEnumFromSign(operatorString);
+                result = operator.apply(x,y);
+                printResult(x, operator.getSign(), y, result);
             }
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -30,12 +34,15 @@ public class KakaoCalculator {
         }
         return result;
     }
+
     public List<String> getList(){
+        for(String result : list) System.out.println(result);
         return list;
     }
-    public String printRoot(String command, double result){
+
+    public String printSquareRoot(String command, double result){
         System.out.println("카카오 계산 결과 : " + result);
-        list.add("root " + command + " = : " + result);
+        list.add("제곱근 " + command + " = : " + result);
         return "카카오 계산 결과 : " + result;
     }
 
